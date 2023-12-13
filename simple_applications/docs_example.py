@@ -2,7 +2,7 @@ import openai
 import composo as cp
 
 
-@cp.Composo.link(api_key="cp-DJF1RFQQ1RVNJ4Q472KS50ENJ2987")
+@cp.Composo.link()
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(choices=["gpt-3.5-turbo", "gpt-4"]),
     system: cp.StrParam(

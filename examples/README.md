@@ -1,1 +1,0 @@
-Composo demo apps

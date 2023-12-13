@@ -1,7 +1,7 @@
 import openai
 import composo as cp
 
-@cp.Composo.link(api_key="API_KEY_FOR_TESTING")
+@cp.Composo.link()
 def simple_llm_call(
 	model: cp.MultiChoiceStrParam(choices=["gpt-3.5-turbo", "gpt-4"]),
 	temp: cp.FloatParam(min=0.0, max=2.0),
