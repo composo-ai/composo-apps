@@ -1,8 +1,11 @@
+import os
+os.environ["PACKAGE_ENV"] = "dev"
+
 import openai
 import composo as cp
 import copy
 
-@cp.Composo.link()
+@cp.Composo.link(api_key="cp-IYFA1ZW8BECOZ3MB3JLXHO7XKPNS0")
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(choices=["gpt-3.5-turbo", "gpt-4"]),
     temperature: cp.FloatParam(min=0.0, max=2.0),

@@ -1,3 +1,6 @@
+import os
+os.environ["PACKAGE_ENV"] = "local"
+
 import composo as cp
 import openai
 
@@ -37,7 +40,7 @@ final_user_message = """\
 """
 
 
-@cp.Composo.link()
+@cp.Composo.link(api_key="cp-0CB7TAY350QG53D07P4065962Y95N")
 def medical_advice_bot(
     original_question: cp.StrParam,
     stepback_generation_system_message: cp.StrParam = stepback_generation_system_message,
