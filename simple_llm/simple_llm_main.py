@@ -1,13 +1,24 @@
-import os
-os.environ["PACKAGE_ENV"] = "dev"
-
-import openai
 import composo as cp
 import copy
 
-@cp.Composo.link(api_key="cp-IYFA1ZW8BECOZ3MB3JLXHO7XKPNS0")
+import os
+
+from litellm import completion
+
+model_mapping = {
+    "OpenAI GPT-3.5 Turbo": "gpt-3.5-turbo",
+    "OpenAI GPT-4 Turbo": "gpt-4-1106-preview",
+    "Google Gemini Pro": "gemini-pro",
+    "Cohere Command": "command",
+    "Cohere Command Light": "command-light",
+}
+
+
+@cp.Composo.link()
 def simple_llm_call(
-    model: cp.MultiChoiceStrParam(choices=["gpt-3.5-turbo", "gpt-4"]),
+    model: cp.MultiChoiceStrParam(
+        choices=list(model_mapping.keys()),
+    ),
     temperature: cp.FloatParam(min=0.0, max=2.0),
     system_message: cp.StrParam(
         description="System Message. Use {text}, {length} and {audience} to insert variables."
@@ -18,26 +29,24 @@ def simple_llm_call(
     messages.insert(0, {"role": "system", "content": system_message})
 
     prediction = (
-        openai.ChatCompletion.create(
-            model=model,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=256,
+        completion(
+            model_mapping[model], messages, temperature=temperature, max_tokens=512
         )
         .choices[0]
         .message["content"]
     )
+
     return prediction
 
 
 output = simple_llm_call(
-    model="gpt-3.5-turbo",
+    model="OpenAI GPT-3.5 Turbo",
     temperature=0.7,
-    system_message="Summarise the provided text",
+    system_message="Be kind and helpful",
     conversation_history=[
         {
             "role": "user",
-            "content": "The following is a summary of the provided text: ",
+            "content": "Hi! What's good?",
         }
     ],
 )
