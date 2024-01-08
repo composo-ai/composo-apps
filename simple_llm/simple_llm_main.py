@@ -1,8 +1,5 @@
 import composo as cp
 import copy
-
-import os
-
 from litellm import completion
 
 model_mapping = {
@@ -11,6 +8,9 @@ model_mapping = {
     "Google Gemini Pro": "gemini-pro",
     "Cohere Command": "command",
     "Cohere Command Light": "command-light",
+    "Claude V2.1": "anthropic.claude-v2:1",
+    "Meta Llama 2 13b": "meta.llama2-13b-chat-v1",
+    "Meta Llama 2 70b": "meta.llama2-70b-chat-v1",
 }
 
 

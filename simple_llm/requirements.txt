@@ -1,3 +1,4 @@
 composo
 litellm
 google-cloud-aiplatform
+boto3

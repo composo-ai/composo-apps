@@ -1,6 +1,3 @@
-import os
-os.environ["PACKAGE_ENV"] = "local"
-
 import composo as cp
 import openai
 

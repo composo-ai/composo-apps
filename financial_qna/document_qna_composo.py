@@ -1,6 +1,3 @@
-import os
-os.environ["PACKAGE_ENV"] = "local"
-
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
@@ -15,7 +12,7 @@ db = FAISS.load_local("embeddings/2022-alphabet-annual-report", OpenAIEmbeddings
 default_system_message = "You are a helpful customer service assistant. Use the snippets provided to answer the user's question: {retrieved_snippets}"
 
 
-@cp.Composo.link(api_key="cp-Y2TKVT03BLN1IC18YBJYQD66UG9H2")
+@cp.Composo.link()
 def document_qa(
     temperature: cp.FloatParam(
         description="This is the level of creativity the model can use where 0 is less creative, more determinstic",
