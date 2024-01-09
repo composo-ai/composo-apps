@@ -1,6 +1,13 @@
+import os
+
+os.environ["PACKAGE_ENV"] = "local"
+
 import composo as cp
 import copy
 from litellm import completion
+import litellm
+
+litellm.set_verbose = True
 
 model_mapping = {
     "OpenAI GPT-3.5 Turbo": "gpt-3.5-turbo",
@@ -20,9 +27,7 @@ def simple_llm_call(
         choices=list(model_mapping.keys()),
     ),
     temperature: cp.FloatParam(min=0.0, max=2.0),
-    system_message: cp.StrParam(
-        description="System Message. Use {text}, {length} and {audience} to insert variables."
-    ),
+    system_message: cp.StrParam(description="System Message."),
     conversation_history: cp.ConversationHistoryParam,
 ):
     messages = copy.deepcopy(conversation_history)

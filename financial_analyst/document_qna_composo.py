@@ -15,7 +15,7 @@ default_system_message = "You are a helpful customer service assistant. Use the 
 @cp.Composo.link()
 def document_qa(
     temperature: cp.FloatParam(
-        description="This is the level of creativity the model can use where 0 is less creative, more determinstic",
+        description="This can be thought of as the level of creativity, randomness or determinism displayed. Temperature is a value between 0 and 2. Higher values like 1.6 will make the output more random, while lower values like 0.2 will make the output more focussed and deterministic.",
         min=0,
         max=2,
     ),
@@ -29,6 +29,12 @@ def document_qa(
     ),
     user_message: cp.StrParam(description="This is the user's input"),
 ):
+    """
+    A demo application which answer's a user's queries about Alphabet's 2022 annual report using retrieval augmented generation (RAG).
+    \n\n
+    \n\n
+    For further explanation please refer to the Quickstart section in our documentation [here](https://www.notion.so/Composo-documentation-c8188c36fd7a4f7d9d45b2faa436316f?pvs=4).
+    """
     if len(tiktoken.encoding_for_model("gpt-3.5-turbo").encode(user_message)) > 256:
         return "This demo app has a 256 token limit for queries"
 

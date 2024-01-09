@@ -1,7 +1,7 @@
 import composo as cp
 import openai
 
-stepback_generation_system_message = f"""\
+llm_1_prompt = """\
 You are a medical expert. Your task is to step back and paraphrase a question to a more generic step-back question, which is easier to answer. 
 
 Here are a few examples:
@@ -13,51 +13,57 @@ Original Question: A 23-year-old pregnant woman at 22 weeks gestation presents w
 Stepback Question: What are the potential causes of these symptoms & signs?\
 """
 
-stepback_generation_user_message = """\
-Original Question: {original_question}\
-"""
+stepback_generation_user_message = "Original Question: {user_message}"
 
-stepback_answer_system_message = f"""\
+llm_2_prompt = """\
 You are a medical expert. Your task is to answer the user's question accurately and concisely.\
+    
+It may be useful to know that the question is related to the wider question of: {user_message}. However, your task is not to answer this wider question, focus on the user's question.\
 """
 
-stepback_answer_user_message = """\
-{stepback_question}\
-"""
-
-final_system_message = """\
+llm_3_prompt = """\
 You are a medical expert. Your task is to answer the user's question accurately and concisely. You'll be provided with a question and answer pair related to the topic that may be useful in answering the user's question.
 
 Question:{stepback_question}
 Answer: {stepback_answer}\
 """
 
-final_user_message = """\
-{original_question}\
-"""
 
-
-@cp.Composo.link(api_key="cp-0CB7TAY350QG53D07P4065962Y95N")
+@cp.Composo.link()
 def medical_advice_bot(
-    original_question: cp.StrParam,
-    stepback_generation_system_message: cp.StrParam = stepback_generation_system_message,
-    stepback_generation_user_message: cp.StrParam = stepback_generation_user_message,
-    stepback_answer_system_message: cp.StrParam = stepback_answer_system_message,
-    stepback_answer_user_message: cp.StrParam = stepback_answer_user_message,
-    final_system_message: cp.StrParam = final_system_message,
-    final_user_message: cp.StrParam = final_user_message,
-    temperature: cp.FloatParam = 0.7,
+    user_message: cp.StrParam(description="This is the user's query to the AI doctor"),
+    llm_1_prompt: cp.StrParam(
+        description="This is the system message for LLM 1, which uses the user's query to generate a 'stepback question'. This is an abstraction of the original query which helps the LLM to think through its answer and can lead to more accurate responses. For example, if the question were a specific question related to physics, a good stepback question might be 'What are the physics principles important in this question?'."
+    ) = llm_1_prompt,
+    llm_2_prompt: cp.StrParam(
+        description="This is the system message for LLM 2, which takes as inputs the user's original query & the generated stepback question, and then outputs the answer to this stepback question."
+    ) = llm_2_prompt,
+    llm_3_prompt: cp.StrParam(
+        description="This is the system message for LLM 3, which takes as inputs the user's original query, the stepback question, the stepback answer, and then outputs the final answer back to the user."
+    ) = llm_3_prompt,
+    temperature: cp.FloatParam(
+        description="This can be thought of as the level of creativity, randomness or determinism displayed. Temperature is a value between 0 and 2. Higher values like 1.6 will make the output more random, while lower values like 0.2 will make the output more focussed and deterministic.",
+        min=0,
+        max=2,
+    ) = 0.7,
 ):
+    """
+    A demo application which uses step-back prompting to answer medical questions.
+    \n\n
+    \n\n
+    For further explanation please refer to the Quickstart section in our documentation [here](https://www.notion.so/Composo-documentation-c8188c36fd7a4f7d9d45b2faa436316f?pvs=4).
+    """
+
     # Generate the stepback question
     stepback_question = (
         openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": stepback_generation_system_message},
+                {"role": "system", "content": llm_1_prompt},
                 {
                     "role": "user",
                     "content": stepback_generation_user_message.format(
-                        original_question=original_question
+                        user_message=user_message
                     ),
                 },
             ],
@@ -80,13 +86,13 @@ def medical_advice_bot(
             messages=[
                 {
                     "role": "system",
-                    "content": stepback_answer_system_message,
+                    "content": llm_2_prompt.format(
+                        user_message=user_message,
+                    ),
                 },
                 {
                     "role": "user",
-                    "content": stepback_answer_user_message.format(
-                        stepback_question=stepback_question
-                    ),
+                    "content": stepback_question,
                 },
             ],
             temperature=temperature,
@@ -105,14 +111,14 @@ def medical_advice_bot(
             messages=[
                 {
                     "role": "system",
-                    "content": final_system_message.format(
+                    "content": llm_3_prompt.format(
                         stepback_question=stepback_question,
                         stepback_answer=stepback_answer,
                     ),
                 },
                 {
                     "role": "user",
-                    "content": final_user_message.format(original_question=original_question),
+                    "content": user_message,
                 },
             ],
             temperature=temperature,
