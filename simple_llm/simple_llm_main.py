@@ -14,6 +14,7 @@ model_mapping = {
     "Claude V2.1": "anthropic.claude-v2:1",
     "Meta Llama 2 13b": "meta.llama2-13b-chat-v1",
     "Meta Llama 2 70b": "meta.llama2-70b-chat-v1",
+    "Mistral 8x7B": "mistral/mistral-medium",
 }
 
 
