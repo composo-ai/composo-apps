@@ -53,6 +53,6 @@ answer = document_qa(
     temperature=1,
     system_message=default_system_message,
     retrieval_count=3,
-    query="How is Google helping people find new ways to empower people to stay on top of their wellness",
+    query="",
 )
 print(answer)

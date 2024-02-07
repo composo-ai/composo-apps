@@ -132,7 +132,7 @@ def medical_advice_bot(
 
 
 answer = medical_advice_bot(
-    "A 3-month-old baby died suddenly at night while asleep. His mother noticed that he had died only after she awoke in the morning. No cause of death was determined based on the autopsy. Which of the following precautions could have prevented the death of the baby?"
+    ""
 )
 
 print("Final answer = ", answer)

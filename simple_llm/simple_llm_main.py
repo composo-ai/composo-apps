@@ -21,12 +21,25 @@ model_mapping = {
 @cp.Composo.link()
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(
+        description="The specific language model to be used for generating responses.",
         choices=list(model_mapping.keys()),
     ),
-    temperature: cp.FloatParam(min=0.0, max=2.0),
-    system_message: cp.StrParam(description="System Message."),
-    conversation_history: cp.ConversationHistoryParam,
+    temperature: cp.FloatParam(
+        description="A parameter controlling the randomness of the generated output",
+        min=0.0,
+        max=2.0,
+    ),
+    system_message: cp.StrParam(
+        description="Pre-defined information or instructions given to the model as context for the current operation."
+    ),
+    conversation_history: cp.ConversationHistoryParam(
+        description="A list of messages comprising the conversation so far, in OpenAI format."
+    ),
 ) -> litellm.utils.CustomStreamWrapper:
+    """
+    A simple function to call an LLM model.
+    """
+
     messages = copy.deepcopy(conversation_history)
     messages.insert(0, {"role": "system", "content": system_message})
 
@@ -43,12 +56,12 @@ def simple_llm_call(
 
 stream = simple_llm_call(
     model="OpenAI GPT-3.5 Turbo",
-    temperature=0.7,
-    system_message="Be kind and helpful",
+    temperature=1,
+    system_message="",
     conversation_history=[
         {
             "role": "user",
-            "content": "write a poem about a llama",
+            "content": "",
         }
     ],
 )
