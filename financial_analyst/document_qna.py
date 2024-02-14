@@ -1,7 +1,7 @@
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
-import openai
+import litellm
 import tiktoken
 
 db = FAISS.load_local("embeddings/2022-alphabet-annual-report", OpenAIEmbeddings())
@@ -38,8 +38,8 @@ def document_qa(
     ]
 
     return (
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        litellm.completion(
+            model="mistral/mistral-medium",
             messages=messages,
             temperature=temperature,
             max_tokens=256,

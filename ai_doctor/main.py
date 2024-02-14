@@ -1,5 +1,6 @@
 import composo as cp
 import openai
+import litellm
 
 llm_1_prompt = """\
 You are a medical expert. Your task is to step back and paraphrase a question to a more generic step-back question, which is easier to answer. 
@@ -56,8 +57,8 @@ def medical_advice_bot(
 
     # Generate the stepback question
     stepback_question = (
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        litellm.completion(
+            model="mistral/mistral-medium",
             messages=[
                 {"role": "system", "content": llm_1_prompt},
                 {
@@ -81,8 +82,8 @@ def medical_advice_bot(
 
     # Answer the stepback question
     stepback_answer = (
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        litellm.completion(
+            model="mistral/mistral-medium",
             messages=[
                 {
                     "role": "system",
@@ -106,8 +107,8 @@ def medical_advice_bot(
 
     # Generate the final response
     final_answer = (
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        litellm.completion(
+            model="mistral/mistral-medium",
             messages=[
                 {
                     "role": "system",
