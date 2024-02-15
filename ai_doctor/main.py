@@ -58,7 +58,7 @@ def medical_advice_bot(
     # Generate the stepback question
     stepback_question = (
         litellm.completion(
-            model="mistral/mistral-medium",
+            model="gpt-4-1106-preview",
             messages=[
                 {"role": "system", "content": llm_1_prompt},
                 {
@@ -83,7 +83,7 @@ def medical_advice_bot(
     # Answer the stepback question
     stepback_answer = (
         litellm.completion(
-            model="mistral/mistral-medium",
+            model="gpt-4-1106-preview",
             messages=[
                 {
                     "role": "system",
@@ -108,7 +108,7 @@ def medical_advice_bot(
     # Generate the final response
     final_answer = (
         litellm.completion(
-            model="mistral/mistral-medium",
+            model="gpt-4-1106-preview",
             messages=[
                 {
                     "role": "system",

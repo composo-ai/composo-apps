@@ -39,7 +39,7 @@ def document_qa(
 
     return (
         litellm.completion(
-            model="mistral/mistral-medium",
+            model="gpt-3.5-turbo",
             messages=messages,
             temperature=temperature,
             max_tokens=256,
