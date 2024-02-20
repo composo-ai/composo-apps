@@ -1,6 +1,6 @@
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
-import litellm
+import openai
 import tiktoken
 import composo as cp
 import time
@@ -59,7 +59,7 @@ def document_qa(
     time.sleep(5)
 
     return (
-        litellm.completion(
+        openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=temperature,
