@@ -67,8 +67,7 @@ def document_qa(
         .message["content"]
     )
 
-    # return completion, [x.page_content for x in docs]
-    return completion
+    return completion, [x.page_content for x in docs]
 
 
 answer = document_qa(
