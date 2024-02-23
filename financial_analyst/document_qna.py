@@ -37,7 +37,7 @@ def document_qa(
         {"role": "user", "content": query},
     ]
 
-    return (
+    completion = (
         openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
@@ -47,6 +47,8 @@ def document_qa(
         .choices[0]
         .message["content"]
     )
+
+    return completion, [x.page_content for x in docs]
 
 
 answer = document_qa(
