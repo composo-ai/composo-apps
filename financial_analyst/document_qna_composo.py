@@ -1,9 +1,8 @@
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
-import openai
+from litellm import completion
 import tiktoken
 import composo as cp
-import time
 
 
 db = FAISS.load_local("embeddings/2022-alphabet-annual-report", OpenAIEmbeddings())
@@ -56,18 +55,19 @@ def document_qa(
         {"role": "user", "content": user_message},
     ]
 
-    completion = (
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=messages,
+    prediction = (
+        completion(
+            "gpt-3.5-turbo",
+            messages,
             temperature=temperature,
-            max_tokens=256,
+            max_tokens=512,
+            stream=False,
         )
         .choices[0]
         .message["content"]
     )
 
-    return completion, [x.page_content for x in docs]
+    return prediction, [x.page_content for x in docs]
 
 
 answer = document_qa(
