@@ -1,0 +1,11 @@
+{
+  "main": "main.ts",
+  "scripts": {
+    "start": "ts-node main.ts"
+  },
+  "dependencies": {
+    "composo": "*",
+    "openai": "^4.28.0",
+    "ts-node": "^10.9.2"
+  }
+}
