@@ -6,7 +6,7 @@ async function simpleLLMCall(
   temperature: number,
   system_message: string,
   conversation_history: OpenAI.Chat.Completions.ChatCompletionMessageParam[]
-): Promise<string> {
+) {
   const client = new OpenAI();
 
   const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
@@ -30,7 +30,7 @@ linkComposo(simpleLLMCall, [
   [
     {
       role: "user",
-      content: "What is the meaning of life?",
+      content: "",
     },
   ],
 ]);

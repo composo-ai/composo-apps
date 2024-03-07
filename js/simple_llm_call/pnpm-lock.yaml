@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   composo:
-    specifier: '*'
-    version: 0.1.31
+    specifier: link:../../../js
+    version: link:../../../js
   openai:
-    specifier: 4.28.0
-    version: 4.28.0
+    specifier: ^4.28.0
+    version: 4.28.4
   ts-node:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.11.24)(typescript@5.3.3)
@@ -108,16 +108,6 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: false
 
-  /axios@1.6.7:
-    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
-    dependencies:
-      follow-redirects: 1.15.5
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /base-64@0.1.0:
     resolution: {integrity: sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==}
     dev: false
@@ -131,15 +121,6 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
-    dev: false
-
-  /composo@0.1.31:
-    resolution: {integrity: sha512-hQfrxnbc7m7AZ9MQOk2ZzVMIjgTjjSuj4j7mtRHOMYkwdbDRJvlCwiW3Ur7apwAPet9kauXBL5jQkB01is3rzw==}
-    engines: {node: '>= 6.0.0'}
-    dependencies:
-      axios: 1.6.7
-    transitivePeerDependencies:
-      - debug
     dev: false
 
   /create-require@1.1.1:
@@ -170,16 +151,6 @@ packages:
   /event-target-shim@5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
-    dev: false
-
-  /follow-redirects@1.15.5:
-    resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
     dev: false
 
   /form-data-encoder@1.7.2:
@@ -258,8 +229,8 @@ packages:
       whatwg-url: 5.0.0
     dev: false
 
-  /openai@4.28.0:
-    resolution: {integrity: sha512-JM8fhcpmpGN0vrUwGquYIzdcEQHtFuom6sRCbbCM6CfzZXNuRk33G7KfeRAIfnaCxSpzrP5iHtwJzIm6biUZ2Q==}
+  /openai@4.28.4:
+    resolution: {integrity: sha512-RNIwx4MT/F0zyizGcwS+bXKLzJ8QE9IOyigDG/ttnwB220d58bYjYFp0qjvGwEFBO6+pvFVIDABZPGDl46RFsg==}
     hasBin: true
     dependencies:
       '@types/node': 18.19.21
@@ -273,10 +244,6 @@ packages:
       web-streams-polyfill: 3.3.3
     transitivePeerDependencies:
       - encoding
-    dev: false
-
-  /proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
 
   /tr46@0.0.3:
