@@ -5,7 +5,7 @@ import tiktoken
 import composo as cp
 
 
-db = FAISS.load_local("embeddings/2022-alphabet-annual-report", OpenAIEmbeddings())
+db = FAISS.load_local("embeddings/2022-alphabet-annual-report", OpenAIEmbeddings(), allow_dangerous_deserialization=True)
 
 default_system_message = "You are a helpful customer service assistant. Use the snippets provided to answer the user's question: {retrieved_snippets}"
 

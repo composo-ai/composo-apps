@@ -1,5 +1,4 @@
 import composo as cp
-import openai
 import litellm
 
 llm_1_prompt = """\
