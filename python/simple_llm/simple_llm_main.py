@@ -18,7 +18,7 @@ model_mapping = {
 }
 
 
-@cp.Composo.link()
+@cp.Composo.link(auto_bump=True)
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(
         description="The specific language model to be used for generating responses.",
@@ -33,7 +33,7 @@ def simple_llm_call(
         description="Pre-defined information or instructions given to the model as context for the current operation."
     ),
     conversation_history: cp.ConversationHistoryParam(
-        description="A list of messages comprising the conversation so far, in OpenAI format."
+        description="A list of messages comprising the conversation so far, in OpenAI format"
     ),
 ) -> litellm.utils.CustomStreamWrapper:
     """
