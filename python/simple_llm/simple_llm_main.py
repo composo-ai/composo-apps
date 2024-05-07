@@ -18,7 +18,7 @@ model_mapping = {
 }
 
 
-@cp.Composo.link(auto_bump=True)
+@cp.Composo.link()
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(
         description="The specific language model to be used for generating responses.",
