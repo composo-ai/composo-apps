@@ -17,8 +17,7 @@ model_mapping = {
     "Mistral 8x7B": "mistral/mistral-medium",
 }
 
-
-@cp.Composo.link()
+@cp.Composo()
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(
         description="The specific language model to be used for generating responses.",
@@ -53,15 +52,15 @@ def simple_llm_call(
 
     return prediction
 
-
-stream = simple_llm_call(
-    model="OpenAI GPT-3.5 Turbo",
-    temperature=1,
-    system_message="",
-    conversation_history=[
-        {
-            "role": "user",
-            "content": "",
-        }
-    ],
-)
+if __name__ == "__main__":
+    stream = simple_llm_call(
+        model="OpenAI GPT-3.5 Turbo",
+        temperature=1,
+        system_message="",
+        conversation_history=[
+            {
+                "role": "user",
+                "content": "",
+            }
+        ],
+    )

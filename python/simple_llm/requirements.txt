@@ -2,3 +2,4 @@ composo
 litellm
 google-cloud-aiplatform
 boto3
+pydantic
