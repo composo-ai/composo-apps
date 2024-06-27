@@ -29,7 +29,7 @@ Answer: {stepback_answer}\
 """
 
 
-@cp.Composo.link()
+@cp.Composo.link(development_mode=True)
 def medical_advice_bot(
     user_message: cp.StrParam(description="This is the user's query to the AI doctor"),
     llm_1_prompt: cp.StrParam(

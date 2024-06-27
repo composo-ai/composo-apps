@@ -1,1 +1,1 @@
-composo
+composo==0.2.9

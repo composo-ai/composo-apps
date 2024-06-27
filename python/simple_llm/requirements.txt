@@ -1,4 +1,4 @@
-composo
+composo==0.2.9
 litellm
 google-cloud-aiplatform
 boto3

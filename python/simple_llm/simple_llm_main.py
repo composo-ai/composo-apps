@@ -17,7 +17,7 @@ model_mapping = {
     "Mistral 8x7B": "mistral/mistral-medium",
 }
 
-@cp.Composo()
+@cp.Composo.link(development_mode=True)
 def simple_llm_call(
     model: cp.MultiChoiceStrParam(
         description="The specific language model to be used for generating responses.",

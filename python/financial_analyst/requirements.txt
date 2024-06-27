@@ -4,4 +4,4 @@ litellm
 langchain
 tiktoken
 faiss-cpu
-composo
+composo==0.2.9

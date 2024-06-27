@@ -1,7 +1,7 @@
 import composo as cp
 
 
-@cp.Composo.link()
+@cp.Composo.link(development_mode=True)
 def hello_world(
     name: cp.StrParam,
 ):
