@@ -10,7 +10,7 @@ db = FAISS.load_local("embeddings/2022-alphabet-annual-report", OpenAIEmbeddings
 default_system_message = "You are a helpful customer service assistant. Use the snippets provided to answer the user's question: {retrieved_snippets}"
 
 
-@cp.Composo.link()
+@cp.Composo.link(development_mode=True)
 def document_qa(
     temperature: cp.FloatParam(
         description="This can be thought of as the level of creativity, randomness or determinism displayed. Temperature is a value between 0 and 2. Higher values like 1.6 will make the output more random, while lower values like 0.2 will make the output more focussed and deterministic.",
